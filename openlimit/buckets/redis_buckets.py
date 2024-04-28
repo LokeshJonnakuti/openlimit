@@ -81,11 +81,8 @@ class RedisBuckets(object):
 
             # Determine if we have sufficient capacity
             has_capacity = min(
-                [
-                    amount <= new_capacity
-                    for amount, new_capacity in zip(amounts, new_capacities)
-                ]
-            )
+                amount <= new_capacity
+                    for amount, new_capacity in zip(amounts, new_capacities))
 
             # If there is enough capacity, remove the amount
             if has_capacity:

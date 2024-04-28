@@ -34,7 +34,7 @@ def num_tokens_consumed_by_completion_request(prompt, max_tokens=15, n=1, **kwar
         num_tokens += len(P50K_ENCODER.encode(prompt))
     elif isinstance(prompt, list):  # Multiple prompts
         num_tokens *= len(prompt)
-        num_tokens += sum([len(P50K_ENCODER.encode(p)) for p in prompt])
+        num_tokens += sum(len(P50K_ENCODER.encode(p)) for p in prompt)
     else:
         raise TypeError(
             "Either a string or list of strings expected for 'prompt' field in completion request."
@@ -47,7 +47,7 @@ def num_tokens_consumed_by_embedding_request(input, **kwargs):
     if isinstance(input, str):  # Single input
         return len(P50K_ENCODER.encode(input))
     elif isinstance(input, list):  # Multiple inputs
-        return sum([len(P50K_ENCODER.encode(i)) for i in input])
+        return sum(len(P50K_ENCODER.encode(i)) for i in input)
 
     raise TypeError(
         "Either a string or list of strings expected for 'input' field in embedding request."
